@@ -26,15 +26,17 @@ public class PedidoService {
 		return pedidoDAO.getAll();
 	}
 
-	public Map<Cliente, Double> listadoOrden(){
+	public List<Map.Entry<Cliente, Double>> listadoOrden(){
 		List<Pedido> listaPedidos = pedidoDAO.getAll();
 
-		// Utilizamos Java Streams para agrupar los pedidos por cliente y luego sumamos los totales
 		Map<Cliente, Double> sumaPorCliente = listaPedidos.stream()
 				.collect(Collectors.groupingBy(Pedido::getCliente, Collectors.summingDouble(Pedido::getTotal)));
 
+		List<Map.Entry<Cliente, Double>> clientesOrdenadosPorSuma = sumaPorCliente.entrySet().stream()
+				.sorted((entry1, entry2) -> Double.compare(entry2.getValue(), entry1.getValue()))
+				.collect(Collectors.toList());
 
-		return sumaPorCliente;
+		return clientesOrdenadosPorSuma;
 	}
 
 	public Pedido one(Integer id) {
@@ -50,6 +52,7 @@ public class PedidoService {
 		pedidoDAO.create(pedido);
 	}
 
+	// Para crear mediante busqueda ya que no sabia la existencia del mapper y dto
 	public void newPedidoIds(Pedido pedido, Integer id_cliente, Integer id_comercial) {
 
 		pedidoDAO.createCliCom(pedido, id_cliente, id_comercial);

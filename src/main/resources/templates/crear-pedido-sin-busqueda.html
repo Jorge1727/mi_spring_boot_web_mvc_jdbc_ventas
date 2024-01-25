@@ -1,0 +1,68 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Crear Pedido</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-9">
+            <div class="card">
+                <form th:action="@{/pedidos/crear-sinBusqueda}" th:object="${pedidoDTO}" method="post">
+                    <div class="card-header  bg-dark">
+                        <h2 class="text-center text-white" th:text="#{crear} +' '+#{pedido}"></h2>
+                    </div>
+                    <div class="card-body">
+                    <div class="form-group">
+                        <label th:text="#{total}"></label>
+                        <input class="form-control" th:field="*{total}" />
+                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('total')}" th:errors="*{total}">
+<!--                            Nos hemos dado cuenta que con th:errors no hace falta poner los li-->
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{fecha}"></label>
+                        <input type="date" class="form-control" th:field="*{fecha}"/>
+                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{cliente}"></label>
+                        <select class="js-select2 form-select"  th:field="*{id_cliente}">
+                            <option value="-1" th:text="#{error.seleccione} +''+#{cliente}"></option>
+                            <option
+                                    th:each="cliente:${listaClientes}"
+                                    th:value="${cliente.id}"
+                                    th:text="${'Id: ' + cliente.id + ' - ' + cliente.nombre + ' ' + cliente.apellido1 + ' ' + cliente.apellido2}">
+                            </option>
+                        </select>
+                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('id_cliente')}" th:errors="*{id_cliente}">
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{comercial}"></label>
+                        <select class="js-select2 form-select" th:field="*{id_comercial}" >
+                            <option value="-1" th:text="#{error.seleccione} +''+#{cliente}"></option>
+                            <option
+                                    th:each="comercial:${listaComerciales}"
+                                    th:value="${comercial.id}"
+                                    th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido1 + ' ' + comercial.apellido2}"
+                                    ></option>
+                        </select>
+                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('id_comercial')}" th:errors="*{id_cliente}">
+                        </ul>
+                    </div>
+                        <input class="btn btn-success" type="submit" th:value="#{crear}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

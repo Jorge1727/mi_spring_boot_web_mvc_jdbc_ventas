@@ -24,14 +24,12 @@
                         <label th:text="#{nombre}"></label>
                         <input class="form-control" th:field="*{nombre}" />
                         <ul class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
-                            <li th:each="err : ${#fields.hasErrors('nombre')}"/>
                         </ul>
                     </div>
                     <div class="form-group">
                         <label th:text="#{apellido}"> 1</label>
                         <input class="form-control" th:field="*{apellido1}" />
                         <ul class="alert alert-danger" th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}">
-                            <li th:each="err : ${#fields.hasErrors('apellido1')}"/>
                         </ul>
                     </div>
                     <div class="form-group">
@@ -42,21 +40,18 @@
                         <label th:text="#{email}"></label>
                         <input class="form-control" th:field="*{email}" />
                         <ul class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-                            <li th:each="err : ${#fields.hasErrors('email')}"/>
                         </ul>
                     </div>
                     <div class="form-group">
                         <label th:text="#{ciudad}"></label>
                         <input class="form-control" th:field="*{ciudad}" />
                         <ul class="alert alert-danger" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}">
-                            <li th:each="err : ${#fields.hasErrors('ciudad')}"/>
                         </ul>
                     </div>
                     <div class="form-group">
                         <label th:text="#{categoria}"></label>
                         <input class="form-control" th:field="*{categoria}" />
                         <ul class="alert alert-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}">
-                            <li th:each="err : ${#fields.hasErrors('categoria')}"/>
                         </ul>
                     </div>
 

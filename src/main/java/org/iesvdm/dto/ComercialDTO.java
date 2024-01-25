@@ -1,4 +1,4 @@
-package org.iesvdm.modelo;
+package org.iesvdm.dto;
 
 
 import jakarta.validation.constraints.*;

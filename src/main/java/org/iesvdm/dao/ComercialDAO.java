@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.iesvdm.modelo.Comercial;
-import org.iesvdm.modelo.ComercialDTO;
+import org.iesvdm.dto.ComercialDTO;
 
 public interface ComercialDAO {
 	

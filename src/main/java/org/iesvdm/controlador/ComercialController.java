@@ -1,9 +1,9 @@
 package org.iesvdm.controlador;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
+import org.iesvdm.dto.ComercialDTO;
 import org.iesvdm.modelo.*;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ClienteService;

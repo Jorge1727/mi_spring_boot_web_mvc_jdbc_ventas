@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.iesvdm.modelo.Comercial;
-import org.iesvdm.modelo.ComercialDTO;
+import org.iesvdm.dto.ComercialDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;

@@ -1,22 +1,21 @@
-package org.iesvdm.modelo;
-
-
+package org.iesvdm.dto;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.Comercial;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-//La anotación @Data de lombok proporcionará el código de:
-//getters/setters, toString, equals y hashCode
-//propio de los objetos POJOS o tipo Beans
 @Data
 //Para generar un constructor con lombok con todos los args
 @AllArgsConstructor
-public class Pedido {
+public class PedidoDTO {
     private int id;
 
     @NotNull(message = "El campo no puede estar vacio")
@@ -27,11 +26,11 @@ public class Pedido {
     @NotNull(message = "El campo no puede estar vacio")
     private Date fecha;
 
-    @Valid
-    private Cliente cliente;
+    @Min(value=1, message = "{error.seleccione} {cliente}")
+    private int id_cliente;
 
-    @Valid
-    private Comercial comercial;
-    public Pedido(){}
+    @Min(value=1, message = "error")
+    private int id_comercial;
+    public PedidoDTO(){}
 
 }
