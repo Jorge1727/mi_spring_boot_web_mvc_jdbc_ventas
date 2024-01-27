@@ -108,7 +108,7 @@
 							</a>
 						</td>
 						<td th:text="${pedidoCliente.getKey().getApellido1()}">apellido</td>
-						<td th:text="${pedidoCliente.getValue()} + '€'">total</td>
+						<td th:text="${#numbers.formatDecimal(pedidoCliente.getValue(),1, 'DEFAULT', 2, 'DEFAULT')} + '€'">total</td>
 					</tr>
 					</tbody>
 				</table>

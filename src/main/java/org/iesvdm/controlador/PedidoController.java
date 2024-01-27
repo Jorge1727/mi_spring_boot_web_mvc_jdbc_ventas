@@ -202,20 +202,6 @@ public class PedidoController {
 		return "editar-pedido";
 
 	}
-	@PostMapping("/pedidos/editar/{clienteId}/{comercialId}")
-	public String submitEditar(@Valid @ModelAttribute("pedido") Pedido pedido, Errors errors , @PathVariable String clienteId, @PathVariable String comercialId) {
-
-		Integer id_cliente = Integer.parseInt(clienteId);
-		Integer id_comercial = Integer.parseInt(comercialId);
-
-		if(errors.hasErrors()){
-			return "redirect:/pedidos/editar/"+pedido.getId();
-		}
-
-		pedidoService.replacePedidoIds(pedido, id_cliente, id_comercial);
-
-		return "redirect:/pedidos";
-	}
 
 	@PostMapping("/pedidos/borrar/{id}")
 	public RedirectView submitBorrar(@PathVariable Integer id) {

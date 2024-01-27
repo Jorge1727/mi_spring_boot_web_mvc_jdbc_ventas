@@ -8,7 +8,7 @@
 <body>
 <div class="container mt-5">
     <div class="row justify-content-md-center">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header  bg-dark">
                     <h1 class="text-center text-white" th:text="#{ver.detalle} + ' ' + #{clientes}"></h1>
@@ -43,6 +43,34 @@
                         <label for="categoria" th:text="#{categoria}"></label>
                         <input id="categoria" class="form-control" th:value="${cliente.categoria}" readonly="readonly"/>
                     </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="container mt-5">
+                    <h1 class="text-center" th:text="#{pedidos} + ' '+ #{realizados.con}+' '+ #{comerciales}"></h1>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th th:text="#{nombre}"></th>
+                            <th th:text="#{numero}+' '+#{pedidos}"></th>
+                            <th th:text="#{semestre}"></th>
+                            <th th:text="#{trimestre}"></th>
+                            <th th:text="#{anio}"></th>
+                            <th th:text="#{lustro}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="comercial : ${clienteDTO.getComerciales()}">
+                            <td th:text="${comercial.getNombre()}"></td>
+                            <td th:text="${clienteDTO.getPedidosComercial(comercial)}"></td>
+                            <td th:text="${clienteDTO.getSemestre(comercial)}"></td>
+                            <td th:text="${clienteDTO.getTrimestre(comercial)}"></td>
+                            <td th:text="${clienteDTO.getAnio(comercial)}"></td>
+                            <td th:text="${clienteDTO.getLustro(comercial)}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

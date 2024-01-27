@@ -76,7 +76,6 @@ public class ComercialController {
         model.addAttribute("listaPedidos", listaPedidos);
 
         return "detalle-comercial";
-
     }
 
     @GetMapping("/comerciales/editar/{id}")

@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label th:text="#{cliente}"></label>
-                        <select class="js-select2 form-select"  th:field="*{id_cliente}">
+                        <select class="js-select2 form-control" th:field="*{id_cliente}">
                             <option value="-1" th:text="#{error.seleccione} +''+#{cliente}"></option>
                             <option
                                     th:each="cliente:${listaClientes}"
@@ -44,8 +44,8 @@
                     </div>
                     <div class="form-group">
                         <label th:text="#{comercial}"></label>
-                        <select class="js-select2 form-select" th:field="*{id_comercial}" >
-                            <option value="-1" th:text="#{error.seleccione} +''+#{cliente}"></option>
+                        <select class="js-select2 form-control" th:field="*{id_comercial}" >
+                            <option value="-1" th:text="#{error.seleccione} +''+#{comercial}"></option>
                             <option
                                     th:each="comercial:${listaComerciales}"
                                     th:value="${comercial.id}"

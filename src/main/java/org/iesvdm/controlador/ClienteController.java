@@ -1,10 +1,16 @@
 package org.iesvdm.controlador;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
+import org.iesvdm.dto.ClienteDTO;
+import org.iesvdm.mapper.ClienteMapper;
 import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.Comercial;
+import org.iesvdm.modelo.Pedido;
 import org.iesvdm.service.ClienteService;
+import org.iesvdm.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +27,10 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteService clienteService;
+	@Autowired
+	private ClienteMapper clienteMapper;
+	@Autowired
+	private PedidoService pedidoService;
 	//Se utiliza inyección automática por constructor del framework Spring.
 	//Por tanto, se puede omitir la anotación Autowired
 
@@ -60,6 +70,12 @@ public class ClienteController {
 	public String detalle(Model model, @PathVariable Integer id ) {
 
 		Cliente cliente = clienteService.one(id);
+		List<Pedido> pedidos = pedidoService.listAll();
+
+		ClienteDTO clienteDTO = clienteMapper.clienteAClienteDTO(cliente, pedidos);
+
+
+		model.addAttribute("clienteDTO", clienteDTO);
 		model.addAttribute("cliente", cliente);
 
 		return "detalle-cliente";
