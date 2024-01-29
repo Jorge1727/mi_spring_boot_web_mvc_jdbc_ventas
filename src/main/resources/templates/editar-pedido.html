@@ -20,16 +20,13 @@
                 <button type="submit" class="btn btn-primary" th:text="#{volver}"></button>
             </form>
             <div class="card">
-                <form class="" th:action="@{/pedidos/editar/__${id_cliente}__/__${id_comercial}__}" th:object="${pedido}" method="post">
+                <form class="" th:action="@{/pedidos/editar/__${id_cliente}__}" th:object="${pedidoDTO}" method="post">
                     <div class="card-header  bg-dark">
                         <h2 class="text-center text-white" th:text="#{editar} +' ' + #{pedido}"></h2>
                     </div>
                     <div class="card-body">
 
                     <div class="form-group">
-                        <input type="hidden" name="clienteId" th:value="${id_cliente}" />
-                        <input type="hidden" name="comercialId" th:value="${id_comercial}" />
-
                         <label>Id</label>
                         <input th:field="*{id}" readonly="readonly"/>
                     </div>
@@ -47,24 +44,30 @@
                             <li th:each="err : ${#fields.hasErrors('fecha')}"/>
                         </ul>
                     </div>
-                    <div class="form-group">
-                        <label th:text="#{cliente}"></label>
-                        <input class="form-control bg-light" th:value="${pedido.cliente.getNombre()}" readonly="readonly" />
-<!--                        <input type="text" class="form-control typeahead" th:field="*{cliente}"-->
-<!--                               th:attr="data-url=@{buscarClientes}" data-provide="typeahead">-->
-<!--                        <input class="form-control" th:field="*{cliente}" />-->
-<!--                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente.getId()}">-->
-<!--                            <li th:each="err : ${#fields.hasErrors('cliente')}"/>-->
-<!--                        </ul>-->
-                    </div>
-                    <div class="form-group">
-                        <label th:text="#{comercial}"></label>
-                        <input class="form-control bg-light" th:value="${pedido.comercial.getNombre()}" readonly="readonly" />
-<!--                        <input class="form-control" th:field="*{comercial}" />-->
-<!--                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('comercial')}" th:errors="*{comercial.getId()}">-->
-<!--                            <li th:each="err : ${#fields.hasErrors('comercial')}"/>-->
-<!--                        </ul>-->
-                    </div>
+                        <div class="form-group">
+                            <label th:text="#{cliente}"></label>
+                            <select class="js-select2 form-control" th:field="*{id_cliente}">
+                                <option value="-1" th:text="#{error.seleccione} +''+#{cliente}"></option>
+                                <option
+                                        th:each="cliente:${listaClientes}"
+                                        th:value="${cliente.id}"
+                                        th:text="${'Id: ' + cliente.id + ' - ' + cliente.nombre + ' ' + cliente.apellido1 + ' ' + cliente.apellido2}">
+                                </option>
+                            </select>
+                            <ul class="alert alert-danger" th:if="${#fields.hasErrors('id_cliente')}" th:errors="*{id_cliente}">
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <label th:text="#{comercial}"></label>
+                            <select class="js-select2 form-control" th:field="*{id_comercial}" >
+                                <option value="-1" th:text="#{error.seleccione} +''+#{comercial}"></option>
+                                <option
+                                        th:each="comercial:${listaComerciales}"
+                                        th:value="${comercial.id}"
+                                        th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido1 + ' ' + comercial.apellido2}"
+                                ></option>
+                            </select>
+                        </div>
                     <input class="btn btn-success" type="submit" th:value="#{editar}">
                     </div>
                 </form>

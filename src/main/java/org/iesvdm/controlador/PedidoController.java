@@ -197,10 +197,30 @@ public class PedidoController {
 	public String editar(Model model, @PathVariable Integer id) {
 
 		Pedido pedido = pedidoService.one(id);
-		model.addAttribute("pedido", pedido);
+
+		PedidoDTO pedidoDTO = pedidoMapper.pedidoAPedidoFormDTO(pedido);
+		List<Cliente> listaClientes = this.clienteService.listAll();
+		List<Comercial> listaComerciales = this.comercialService.listAll();
+
+		model.addAttribute("listaComerciales", listaComerciales);
+		model.addAttribute("listaClientes", listaClientes);
+		model.addAttribute("pedidoDTO", pedidoDTO);
 
 		return "editar-pedido";
 
+	}
+
+	@PostMapping("/pedidos/editar/{id}")
+	public String submitEditar(@Valid @ModelAttribute("pedidoDTO") PedidoDTO pedidoDTO, Errors errors) {
+
+		if(errors.hasErrors()){
+
+			return "editar-cliente";
+		}
+		Pedido pedido = pedidoMapper.pedidoFormDTOAPedido(pedidoDTO);
+		pedidoService.replacePedido(pedido);
+
+		return "redirect:/pedidos";
 	}
 
 	@PostMapping("/pedidos/borrar/{id}")
